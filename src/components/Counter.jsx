@@ -4,10 +4,10 @@ import React, {
 } from 'react'
 import Count from './Count';
 import styled from 'styled-components';
-import { Container } from 'react-bootstrap';
+import { Container, Row, Col } from 'react-bootstrap';
 
 const Counter = props => {
-    const [counter, setCounter] = useState(0);
+    const [counter, setCounter] = useState(props.startCount || 0);
     const [edit, setEdit] = useState(false);
     const incrementCounter = () => {
         if(props.maxCount) {
@@ -42,6 +42,7 @@ const Counter = props => {
                     setEdit(false);
                 }}
             >
+            <Row>
                 <StyledCounter>
                     <Count
                         onChange={count => setCounter(count)}
@@ -50,13 +51,17 @@ const Counter = props => {
                         count={counter}
                     />
                 </StyledCounter>
-                <div>
+            </Row>
+            <Row>
+                <Col md={6}>
                     <StyledButton
                         onClick={e => {
                             e.preventDefault();
                             counter > 0 && setCounter(counter - 1);
                         }}
                     >-</StyledButton>
+                </Col>
+                <Col md={6}>
                     <StyledButton
                         onClick={e => {
                             e.preventDefault();
@@ -67,13 +72,16 @@ const Counter = props => {
                             }
                         }}
                     >+</StyledButton>
+                </Col>
+                <Col md={12}>
                     <StyledButton
                         onClick={e => {
                             e.preventDefault();
                             setCounter(0);
                         }}
                     >Reset</StyledButton>
-                </div>
+                </Col>
+            </Row>
             </StyledCounterWrapper>
         </Container>
     );
@@ -89,7 +97,6 @@ const StyledCounter = styled.div`
     font-family: Arial sans-serif;
     font-weight: bold;
     font-size: 8rem;
-    border: 2px solid #ffffff;
     margin: 3px auto;
 `
 const StyledButton = styled.button`
@@ -101,6 +108,7 @@ const StyledButton = styled.button`
     border-radius: 3px;
     font-size: 1.5rem;
     border: 2px solid #ffffff;
+    width: 100%;
 `
 
 export default Counter;

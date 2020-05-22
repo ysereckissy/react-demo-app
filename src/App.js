@@ -2,6 +2,7 @@ import React from 'react';
 import { 
   Container, 
   Row,
+  Col
 } from 'react-bootstrap';
 import {
   BrowserRouter as Router,
@@ -12,6 +13,7 @@ import './App.css';
 import NavigationBar from './layout/NavigationBar';
 import Clock from './components/Clock';
 import Counter from './components/Counter'
+import CounterPage from './pages/CounterPage';
 
 function App() {
   return (
@@ -28,7 +30,7 @@ function App() {
             <Clock />
           </Route>
           <Route path="/counter">
-            <Counter autoCount="down" minCount={2}/>
+            <CounterPage />
           </Route>
         </Switch>
         </Row>

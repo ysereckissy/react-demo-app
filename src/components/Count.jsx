@@ -39,6 +39,9 @@ const Count = props => {
 
 const StyledCount = styled.span`
     margin: auto;
+    text-align: center;
+    padding-left: 5px;
+    display: inline-block;
 `
 
 export default Count;
