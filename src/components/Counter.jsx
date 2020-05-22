@@ -10,13 +10,16 @@ const Counter = props => {
     const [counter, setCounter] = useState(0);
     const [edit, setEdit] = useState(false);
     useEffect(() => {
-        props.autoCount && props.autoCount === "up" && setTimeout(() => {
-            if (props.maxCount) {
-                counter < props.maxCount && setCounter(counter => counter + 1);
-            } else {
-                setCounter(counter => counter + 1);
-            }
-        }, 1000);
+        if (props.autoCount && props.autoCount === "up") {
+            const timer = setTimeout(() => {
+                if (props.maxCount) {
+                    counter < props.maxCount && setCounter(counter => counter + 1);
+                } else {
+                    setCounter(counter => counter + 1);
+                }
+            }, 1000);
+            return () => clearTimeout(timer);
+        }
     });
     return (
         <Container>
