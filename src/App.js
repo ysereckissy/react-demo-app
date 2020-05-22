@@ -28,7 +28,7 @@ function App() {
             <Clock />
           </Route>
           <Route path="/counter">
-            <Counter autoCount="up"/>
+            <Counter autoCount="down" minCount={2}/>
           </Route>
         </Switch>
         </Row>

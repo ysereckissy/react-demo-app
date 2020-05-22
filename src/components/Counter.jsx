@@ -9,15 +9,27 @@ import { Container } from 'react-bootstrap';
 const Counter = props => {
     const [counter, setCounter] = useState(0);
     const [edit, setEdit] = useState(false);
+    const incrementCounter = () => {
+        if(props.maxCount) {
+            counter < props.maxCount && setCounter(counter + 1);
+        }else{
+            setCounter(counter + 1);
+        }
+    }
+    const decrementCounter = () => {
+        if(props.minCount) {
+            counter > props.minCount && setCounter(counter - 1);
+        }else{
+            counter && setCounter(counter - 1);
+        }
+    }
     useEffect(() => {
         if (props.autoCount && props.autoCount === "up") {
-            const timer = setTimeout(() => {
-                if (props.maxCount) {
-                    counter < props.maxCount && setCounter(counter => counter + 1);
-                } else {
-                    setCounter(counter => counter + 1);
-                }
-            }, 1000);
+            const timer = setTimeout(incrementCounter, 1000);
+            return () => clearTimeout(timer);
+        }
+        if(props.autoCount && props.autoCount === "down") {
+            const timer = setTimeout(decrementCounter, 1000);
             return () => clearTimeout(timer);
         }
     });
